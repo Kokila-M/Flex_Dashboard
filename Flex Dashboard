@@ -1,0 +1,108 @@
+---
+title: '"Stores"'
+author: '"kokila M"'
+date: '2022-06-01'
+output: word_document
+---
+
+
+```{r}
+library(lattice)
+library(ggplot2)
+library(tidyverse)
+library(corrplot)
+library(DT)
+```
+#Read dataset
+
+```{r}
+data=read.csv(file.choose(),header = TRUE)
+attach(data)
+```
+
+
+###structure of data set
+
+```{r}
+str(data)
+col(data)
+names(data)
+```
+
+#factors of data set
+
+```{r}
+factor(Store_Area)
+factor(Store_Sales)
+factor(Items_Available)
+factor(Daily_Customer_Count)
+```
+
+#Histogram{.tabset}
+
+```{r}
+hist(Store_Area,col = "Black")
+hist(Store_Sales,col = "Yellow")
+hist(Items_Available,col="Green")
+hist(Daily_Customer_Count,col="Red")
+histogram(~Store_Area|factor(Items_Available))
+```
+
+### barplot{.tabset}
+
+```{r}
+barplot(Store_Area)
+barplot(Store_Sales)
+barplot(Daily_Customer_Count,col = "Red")
+barplot(Items_Available,Store_Area)
+barplot(Daily_Customer_Count,Store_Area,col="orange")
+ 
+```
+# boxplot{.tabset}
+
+```{r}
+boxplot(Store_Area~factor(Daily_Customer_Count))
+boxplot((factor(Store_Sales)~Items_Available),col="Green")
+boxplot(Store_Area~Store_Sales,col="Red")
+boxplot(Daily_Customer_Count,col = "orange")
+```
+
+#dotplot{.tabset}
+
+```{r}
+dotplot(Store_Area~Store_Sales,col= rainbow(3))
+dotplot(Items_Available~Daily_Customer_Count,col="Sky blue")
+
+```
+
+#scatterplot{.tabset}
+
+```{r}
+data1=data[c("Store_Area" , "Daily_Customer_Count") ]
+plot(Store_Sales,main = "sales",col="Violet")
+lines(Store_Sales,type='o',main="Sales",col="Violet")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
